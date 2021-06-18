@@ -8,6 +8,7 @@ on:
         required: true
       pincode:
         description: 'Six digit Pin'
+        default: '12345678'
         required: true
 
 jobs:
