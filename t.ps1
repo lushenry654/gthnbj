@@ -2,5 +2,5 @@ $i = 1
 do {
     Write-Host $i
     Sleep 10
-    $i--
+    $i++
 } while ($i -gt 0)
