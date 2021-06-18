@@ -2,7 +2,7 @@
 
 > **2CPU & 7GB RAM**
 
-> ## [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://github.com/mrijoo/RDP-Windows-GRD/blob/main/.github/workflows/main.yml)
+> ## [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://github.com/mrijoo/RDP-Windows-GRD/blob/master/.github/workflows/main.yml)
 
 ### How to run the project. 
 
