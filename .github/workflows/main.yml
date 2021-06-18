@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       authcode:
-        description: 'Enter Google Remote Desktop code'
+        description: 'Enter Google Remote Desktop ( Windows (PowerShell) ) code'
         required: true
       pincode:
         description: 'Six digit Pin'
