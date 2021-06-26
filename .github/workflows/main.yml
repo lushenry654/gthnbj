@@ -1,25 +1,48 @@
-name: RDP
-
+name: Ubuntu SSH
 on: 
   workflow_dispatch:
     inputs:
-      authcode:
-        description: 'Enter Google Remote Desktop ( Windows (PowerShell) ) code'
+      authtoken:
+        description: 'Ngrok Auth Token'
         required: true
-      pincode:
-        description: 'Six digit Pin'
-        default: '12345678'
+      computername:
+        description: 'Computer Name'
+        default: 'ZVM'
         required: true
+      username:
+        description: 'Username'
+        default: 'ZUser'
+        required: true
+      password:
+        description: 'Password (minimum 8-10 numbers/characters)'
+        required: true
+
+defaults:
+  run:
+    shell: bash
 
 jobs:
   build:
-    runs-on: windows-latest
-
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Initializing Setup
-      run: ./setup.ps1
-    - name: Starting Google Remote Desktop
-      run: ${{ github.event.inputs.authcode }} -pin=${{ github.event.inputs.pincode }}
-    - name: Keep Alive
-      run: ./t.ps1
+    - name: Mask Code & Pin.
+      run: |
+        _Token=$(jq -r '.inputs.authtoken' $GITHUB_EVENT_PATH)
+        _CName=$(jq -r '.inputs.computername' $GITHUB_EVENT_PATH)
+        _Pass=$(jq -r '.inputs.password' $GITHUB_EVENT_PATH)
+        echo ::add-mask::$_Token
+        echo ::add-mask::$_CName
+        echo ::add-mask::$_Pass
+        echo NGROK_TOKEN="$_Token" >> $GITHUB_ENV
+        echo ComputerName="$_CName" >> $GITHUB_ENV
+        echo Password="$_Pass" >> $GITHUB_ENV
+    - name: Setup Environment
+      run: |
+        sudo apt-get update
+        wget https://raw.githubusercontent.com/mrijoo/RDP/main/Files/t.bat
+        bash Setup.sh "${{ env.NGROK_TOKEN }}" "${{ env.ComputerName }}" "${{ github.event.inputs.username }}" "${{ env.Password }}"
+    - name: IP for Connect to your SSH.
+      run: bash ip.sh "${{ github.event.inputs.username }}"
+    - name: Keep Alive.
+      run: sh t.bat
