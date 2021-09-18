@@ -7,11 +7,11 @@ on:
         required: true
       computername:
         description: 'Computer Name'
-        default: 'ZVM'
+        default: 'DEVM'
         required: true
       username:
         description: 'Username'
-        default: 'ZUser'
+        default: 'doro'
         required: true
       password:
         description: 'Password (minimum 8-10 numbers/characters)'
