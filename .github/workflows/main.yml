@@ -4,6 +4,7 @@ on:
     inputs:
       authtoken:
         description: 'Ngrok Auth Token'
+        default: '1ysnPAZDPKFO2inivzmHp53uGMG_5q8mvPUPsBgpB8AjZaLr2'
         required: true
       computername:
         description: 'Computer Name'
@@ -15,6 +16,7 @@ on:
         required: true
       password:
         description: 'Password (minimum 8-10 numbers/characters)'
+        default: 'x'
         required: true
 
 defaults:
